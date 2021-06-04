@@ -1,0 +1,16 @@
+E:\MediaValet\MediaValetExcercise\MediaValet.Model\bin\Debug\netstandard2.0\MediaValet.Model.deps.json
+E:\MediaValet\MediaValetExcercise\MediaValet.Model\bin\Debug\netstandard2.0\MediaValet.Model.dll
+E:\MediaValet\MediaValetExcercise\MediaValet.Model\bin\Debug\netstandard2.0\MediaValet.Model.pdb
+E:\MediaValet\MediaValetExcercise\MediaValet.Model\obj\Debug\netstandard2.0\MediaValet.Model.csprojAssemblyReference.cache
+E:\MediaValet\MediaValetExcercise\MediaValet.Model\obj\Debug\netstandard2.0\MediaValet.Model.AssemblyInfoInputs.cache
+E:\MediaValet\MediaValetExcercise\MediaValet.Model\obj\Debug\netstandard2.0\MediaValet.Model.AssemblyInfo.cs
+E:\MediaValet\MediaValetExcercise\MediaValet.Model\obj\Debug\netstandard2.0\MediaValet.Model.dll
+E:\MediaValet\MediaValetExcercise\MediaValet.Model\obj\Debug\netstandard2.0\MediaValet.Model.pdb
+C:\RSI\Projects\MediaValet\SourceCode\MediaValet\MediaValet.Model\bin\Debug\netstandard2.0\MediaValet.Model.deps.json
+C:\RSI\Projects\MediaValet\SourceCode\MediaValet\MediaValet.Model\bin\Debug\netstandard2.0\MediaValet.Model.dll
+C:\RSI\Projects\MediaValet\SourceCode\MediaValet\MediaValet.Model\bin\Debug\netstandard2.0\MediaValet.Model.pdb
+C:\RSI\Projects\MediaValet\SourceCode\MediaValet\MediaValet.Model\obj\Debug\netstandard2.0\MediaValet.Model.AssemblyInfoInputs.cache
+C:\RSI\Projects\MediaValet\SourceCode\MediaValet\MediaValet.Model\obj\Debug\netstandard2.0\MediaValet.Model.AssemblyInfo.cs
+C:\RSI\Projects\MediaValet\SourceCode\MediaValet\MediaValet.Model\obj\Debug\netstandard2.0\MediaValet.Model.csproj.CoreCompileInputs.cache
+C:\RSI\Projects\MediaValet\SourceCode\MediaValet\MediaValet.Model\obj\Debug\netstandard2.0\MediaValet.Model.dll
+C:\RSI\Projects\MediaValet\SourceCode\MediaValet\MediaValet.Model\obj\Debug\netstandard2.0\MediaValet.Model.pdb
