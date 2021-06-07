@@ -1,4 +1,5 @@
-﻿using Microsoft.WindowsAzure.Storage.Table;
+﻿using MediaValet.Model;
+using Microsoft.WindowsAzure.Storage.Table;
 using SupervisorAPI.Model;
 using SupervisorAPI.Service.Contract;
 using System;
@@ -17,7 +18,7 @@ namespace SupervisorAPI.Service.BusinessLogic
         public static int GenerateOrderId(IConfirmationTable confirmationTable)
         {
             int orderId = 0;
-            CloudTable cloudTable = confirmationTable.GetTable("ordercount");
+            CloudTable cloudTable = confirmationTable.GetTable(StorageEntity.OrderCountStorageTable);
 
             TableContinuationToken tableToken = null;
             var orderEntities = new List<OrderCounter>();

@@ -1,3 +1,4 @@
+using MediaValet.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -23,18 +24,18 @@ namespace SupervisorAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
+            
             services.AddSingleton<ILog, Log>();
 
             services.Configure<AzureStorageConnection>(Configuration.GetSection("Data:Azure"));
 
-            QueueCreator.CreateAzureQueues(Configuration["Data:Azure:ConnectionString"], "orderqueue");
+            QueueCreator.CreateAzureQueues(Configuration["Data:Azure:ConnectionString"], StorageEntity.OrderStorageQueue);
 
             services.AddSingleton<IOrderQueue, OrderQueue>();
 
-            TableCreator.CreateAzureTables(Configuration["Data:Azure:ConnectionString"], "confirmation");
+            TableCreator.CreateAzureTables(Configuration["Data:Azure:ConnectionString"], StorageEntity.ConfirmationStorageTable);
 
-            TableCreator.CreateAzureTables(Configuration["Data:Azure:ConnectionString"], "ordercount");
+            TableCreator.CreateAzureTables(Configuration["Data:Azure:ConnectionString"], StorageEntity.OrderCountStorageTable);
 
             services.AddSingleton<IConfirmationTable, ConfirmationTable>();
         }
@@ -46,7 +47,6 @@ namespace SupervisorAPI
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.ConfigureExceptionHandler(logger);
 
             app.UseRouting();

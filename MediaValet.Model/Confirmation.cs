@@ -1,15 +1,13 @@
 ﻿using Microsoft.WindowsAzure.Storage.Table;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MediaValet.Model
 {
     public class Confirmation : TableEntity
     {
-        public Confirmation(int OrderId, int ramdomNum)
+        public Confirmation(int OrderId, int ramdomNumber)
         {
-            this.PartitionKey = Convert.ToString(OrderId); this.RowKey = Convert.ToString(ramdomNum);
+            this.PartitionKey = Convert.ToString(OrderId); this.RowKey = Convert.ToString(ramdomNumber);
         }
         public Confirmation()
         { }

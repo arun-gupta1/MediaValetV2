@@ -12,12 +12,11 @@ using System.Threading.Tasks;
 namespace SupervisorAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
-    
+    [Route("api/[controller]")]    
     public class OrderController : ControllerBase
     {
 
-        private  int _orderCounter;       
+        private  int orderCounter;       
         private readonly IOrderQueue _orderQueue;
         private readonly IConfirmationTable _confirmationTable;
 
@@ -28,38 +27,37 @@ namespace SupervisorAPI.Controllers
         }
 
         [HttpPost]
-        [Route("enqueue")]
+        [Route("orderqueue")]
         public  async Task<ConfirmationResponse> SendMessageToQueue (OrderMessage msg)
         {
             ConfirmationResponse confirmationResponse=null;
-
             try
             {
-                _orderCounter = Utility.GenerateOrderId(_confirmationTable);
+                orderCounter = Utility.GenerateOrderId(_confirmationTable);
 
                 Random random = new Random();
                 int randomNumber = random.Next(1, 10);
 
                 Order orderEntity = new Order
                 {
-                    OrderId = _orderCounter,
+                    OrderId = orderCounter,
                     RandomNumber = randomNumber,
                     OrderText = msg.OrderText
 
                 };
                 string orderString = System.Text.Json.JsonSerializer.Serialize(orderEntity);
 
-                var orderListQueue = _orderQueue.GetQueue("orderqueue");
+                var orderListQueue = _orderQueue.GetQueue(StorageEntity.OrderStorageQueue);
 
                 orderListQueue.AddMessage(new CloudQueueMessage(Utility.Base64Encode(orderString)));
 
-                CloudTable cloudTable = _confirmationTable.GetTable("confirmation");
+                CloudTable cloudTable = _confirmationTable.GetTable(StorageEntity.ConfirmationStorageTable);
 
                 TableOperation tableOperation = TableOperation.Retrieve<Confirmation>(orderEntity.OrderId.ToString(), orderEntity.RandomNumber.ToString());
                 System.Threading.Thread.Sleep(1000);
 
                 TableResult tableResult = await cloudTable.ExecuteAsync(tableOperation);
-                Confirmation confirmationResult = tableResult.Result as Confirmation;
+                var confirmationResult = tableResult.Result as Confirmation;
                 
                 if (confirmationResult!=null)
                 {
@@ -79,12 +77,13 @@ namespace SupervisorAPI.Controllers
                 {
                     confirmationResponse = new ConfirmationResponse
                     {
-                        OrderID = "",
+                        OrderID = Convert.ToString(orderEntity.OrderId),
                         AgentId = "",
                         OrderStatus = "",
-                        StatusCode = (int)HttpStatusCode.OK,
-                        FaultMessage = "No confirmation received from agent!"
+                        StatusCode = (int)HttpStatusCode.Created,
+                        FaultMessage = "Order has been added into queue. Agent will process it later."
                     };
+                    this.HttpContext.Response.StatusCode = (int)HttpStatusCode.Created;
                 }
             }            
             catch (Exception ex)
