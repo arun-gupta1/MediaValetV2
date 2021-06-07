@@ -27,25 +27,19 @@ namespace Agent
         }
         private static async Task ProcessQueueMessage()
         {
-
             var agentId = Guid.NewGuid();
-
             Random random = new Random();
             int randomNumber = random.Next(1, 10);
 
             Console.WriteLine(" I’m agent " + agentId + ", my magic number is " + randomNumber);
 
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(AzureStorageConnection.ConnectionString);
-
             CloudQueueClient cloudQueueClient = storageAccount.CreateCloudQueueClient();
-
             CloudQueue cloudQueue = cloudQueueClient.GetQueueReference(StorageEntity.OrderStorageQueue);
-
             await cloudQueue.CreateIfNotExistsAsync();
 
             for (int a = 0; a < 1; a--)
             {
-
                 CloudQueueMessage retrievedMessage = await cloudQueue.GetMessageAsync();
                 if (retrievedMessage != null)
                 {
@@ -61,8 +55,6 @@ namespace Agent
                         }
                         Console.WriteLine("Order message: " + orderEntity.OrderText);
 
-
-
                         CloudTableClient Tableclient = storageAccount.CreateCloudTableClient();
                         CloudTable table = Tableclient.GetTableReference(StorageEntity.ConfirmationStorageTable);
                         await table.CreateIfNotExistsAsync();
@@ -76,7 +68,6 @@ namespace Agent
                         TableOperation insertOperation = TableOperation.Insert(obj);
                         await table.ExecuteAsync(insertOperation);
                         await cloudQueue.DeleteMessageAsync(retrievedMessage);
-
                     }
                 }
             }

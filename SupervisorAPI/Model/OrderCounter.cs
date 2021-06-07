@@ -3,7 +3,7 @@ using System;
 
 namespace SupervisorAPI.Model
 {
-    public class OrderCounter: TableEntity
+    public class OrderCounter : TableEntity
     {
         public OrderCounter(string tablename, int tableid)
         {
@@ -11,7 +11,6 @@ namespace SupervisorAPI.Model
         }
         public OrderCounter()
         { }
-
         public int orderid { get; set; }
     }
 }

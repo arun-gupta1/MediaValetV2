@@ -6,7 +6,7 @@ using System;
 
 namespace SupervisorAPI.Service.BusinessLogic
 {
-    public class OrderQueue: IOrderQueue
+    public class OrderQueue : IOrderQueue
     {
         private readonly CloudQueueClient _queueClient;
         public OrderQueue()
@@ -19,7 +19,7 @@ namespace SupervisorAPI.Service.BusinessLogic
             catch (Exception ex)
             {
                 throw ex;
-            }         
+            }
         }
         public CloudQueue GetQueue(string queueName)
         {

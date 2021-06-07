@@ -4,18 +4,18 @@ using SupervisorAPI.Model;
 using SupervisorAPI.Service.Contract;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SupervisorAPI.Service.BusinessLogic
 {
     public static class Utility
-    {       
+    {
         public static string Base64Encode(string plainText)
         {
             var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
             return System.Convert.ToBase64String(plainTextBytes);
         }
-
-        public static int GenerateOrderId(IConfirmationTable confirmationTable)
+        public static async Task<int> GenerateOrderId(IConfirmationTable confirmationTable)
         {
             int orderId = 0;
             CloudTable cloudTable = confirmationTable.GetTable(StorageEntity.OrderCountStorageTable);
@@ -28,7 +28,6 @@ namespace SupervisorAPI.Service.BusinessLogic
                 orderEntities.AddRange(queryResult.Result);
             } while (tableToken != null);
 
-
             if (orderEntities.Count > 0)
             {
                 var orderEntity = orderEntities[0] as OrderCounter;
@@ -36,16 +35,15 @@ namespace SupervisorAPI.Service.BusinessLogic
                 orderEntity.orderid = orderId;
 
                 TableOperation updateOperation = TableOperation.Replace(orderEntity);
-                cloudTable.ExecuteAsync(updateOperation);
+                await cloudTable.ExecuteAsync(updateOperation);
             }
             else
             {
                 OrderCounter obj = new OrderCounter("Order", 1);
                 obj.orderid = orderId;
                 TableOperation insertOperation = TableOperation.Insert(obj);
-                cloudTable.ExecuteAsync(insertOperation);
+                await cloudTable.ExecuteAsync(insertOperation);
             }
-
             return orderId;
         }
     }

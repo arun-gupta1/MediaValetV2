@@ -13,29 +13,25 @@ using System.Threading.Tasks;
 namespace SupervisorAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]    
+    [Route("api/[controller]")]
     public class OrderController : ControllerBase
     {
-
-        private  int orderCounter;       
+        private int orderCounter;
         private readonly IOrderQueue _orderQueue;
         private readonly IConfirmationTable _confirmationTable;
-
         public OrderController(IOrderQueue orderQueue, IConfirmationTable confirmationTable)
         {
             _orderQueue = orderQueue;
             _confirmationTable = confirmationTable;
         }
-
         [HttpPost]
         [Route("orderqueue")]
-        public  async Task<ConfirmationResponse> SendMessageToQueue (OrderMessage msg)
+        public async Task<ConfirmationResponse> SendMessageToQueue(OrderMessage msg)
         {
-            ConfirmationResponse confirmationResponse=null;
+            ConfirmationResponse confirmationResponse = null;
             try
             {
-                orderCounter = Utility.GenerateOrderId(_confirmationTable);
-
+                orderCounter = await Utility.GenerateOrderId(_confirmationTable);
                 Random random = new Random();
                 int randomNumber = random.Next(1, 10);
 
@@ -49,18 +45,14 @@ namespace SupervisorAPI.Controllers
                 string orderString = JsonSerializer.Serialize(orderEntity);
 
                 var orderListQueue = _orderQueue.GetQueue(StorageEntity.OrderStorageQueue);
-
                 await orderListQueue.AddMessageAsync(new CloudQueueMessage(Utility.Base64Encode(orderString)));
-
                 CloudTable cloudTable = _confirmationTable.GetTable(StorageEntity.ConfirmationStorageTable);
 
                 TableOperation tableOperation = TableOperation.Retrieve<Confirmation>(orderEntity.OrderId.ToString(), orderEntity.RandomNumber.ToString());
                 System.Threading.Thread.Sleep(1000);
 
                 TableResult tableResult = await cloudTable.ExecuteAsync(tableOperation);
-                var confirmationResult = tableResult.Result as Confirmation;
-                
-                if (confirmationResult!=null)
+                if (tableResult.Result is Confirmation confirmationResult)
                 {
                     if (!string.IsNullOrEmpty(confirmationResult.OrderStatus))
                     {
@@ -86,13 +78,12 @@ namespace SupervisorAPI.Controllers
                     };
                     this.HttpContext.Response.StatusCode = (int)HttpStatusCode.Created;
                 }
-            }            
+            }
             catch (Exception ex)
             {
                 throw ex;
             }
             return confirmationResponse;
-
         }
     }
 }

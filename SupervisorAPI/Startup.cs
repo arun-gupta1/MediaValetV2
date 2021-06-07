@@ -16,17 +16,14 @@ namespace SupervisorAPI
         {
             Configuration = configuration;
         }
-
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            
-            services.AddSingleton<ILog, Log>();
 
-            //services.Configure<AzureStorageConnection>(Configuration.GetSection("Data:Azure"));
+            services.AddSingleton<ILog, Log>();
 
             QueueCreator.CreateAzureQueues(AzureStorageConnection.ConnectionString, StorageEntity.OrderStorageQueue);
 
@@ -38,7 +35,6 @@ namespace SupervisorAPI
 
             services.AddSingleton<IConfirmationTable, ConfirmationTable>();
         }
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILog logger)
         {

@@ -21,7 +21,6 @@ namespace SupervisorAPI.Logging
                     if (contextFeature != null)
                     {
                         logger.Error($"Something went wrong: {contextFeature.Error}");
-
                         await context.Response.WriteAsync(new ConfirmationResponse()
                         {
                             OrderID = "",

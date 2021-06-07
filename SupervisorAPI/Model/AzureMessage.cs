@@ -2,8 +2,6 @@
 {
     public class OrderMessage
     {
-
         public string OrderText { get; set; }
     }
-
 }
