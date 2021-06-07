@@ -1,4 +1,4 @@
-﻿using Microsoft.Azure.Storage.Queue;
+﻿using Microsoft.WindowsAzure.Storage.Queue;
 
 namespace SupervisorAPI.Service.Contract
 {

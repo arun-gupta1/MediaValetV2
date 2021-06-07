@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MediaValet.Model
+﻿namespace MediaValet.Model
 {
     public static class StorageEntity
     {

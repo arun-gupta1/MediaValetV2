@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using SupervisorAPI.Infrastructure.AzureStorageSetting;
 using SupervisorAPI.Logging;
 using SupervisorAPI.Service.BusinessLogic;
 using SupervisorAPI.Service.Contract;
@@ -27,15 +26,15 @@ namespace SupervisorAPI
             
             services.AddSingleton<ILog, Log>();
 
-            services.Configure<AzureStorageConnection>(Configuration.GetSection("Data:Azure"));
+            //services.Configure<AzureStorageConnection>(Configuration.GetSection("Data:Azure"));
 
-            QueueCreator.CreateAzureQueues(Configuration["Data:Azure:ConnectionString"], StorageEntity.OrderStorageQueue);
+            QueueCreator.CreateAzureQueues(AzureStorageConnection.ConnectionString, StorageEntity.OrderStorageQueue);
 
             services.AddSingleton<IOrderQueue, OrderQueue>();
 
-            TableCreator.CreateAzureTables(Configuration["Data:Azure:ConnectionString"], StorageEntity.ConfirmationStorageTable);
+            TableCreator.CreateAzureTables(AzureStorageConnection.ConnectionString, StorageEntity.ConfirmationStorageTable);
 
-            TableCreator.CreateAzureTables(Configuration["Data:Azure:ConnectionString"], StorageEntity.OrderCountStorageTable);
+            TableCreator.CreateAzureTables(AzureStorageConnection.ConnectionString, StorageEntity.OrderCountStorageTable);
 
             services.AddSingleton<IConfirmationTable, ConfirmationTable>();
         }

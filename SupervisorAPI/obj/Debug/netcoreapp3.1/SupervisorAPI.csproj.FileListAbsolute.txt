@@ -206,9 +206,6 @@ C:\RSI\Projects\MediaValet\SourceCode\MediaValet\SupervisorAPI\bin\Debug\netcore
 C:\RSI\Projects\MediaValet\SourceCode\MediaValet\SupervisorAPI\bin\Debug\netcoreapp3.1\SupervisorAPI.dll
 C:\RSI\Projects\MediaValet\SourceCode\MediaValet\SupervisorAPI\bin\Debug\netcoreapp3.1\SupervisorAPI.pdb
 C:\RSI\Projects\MediaValet\SourceCode\MediaValet\SupervisorAPI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Razor.Language.dll
-C:\RSI\Projects\MediaValet\SourceCode\MediaValet\SupervisorAPI\bin\Debug\netcoreapp3.1\Microsoft.Azure.KeyVault.Core.dll
-C:\RSI\Projects\MediaValet\SourceCode\MediaValet\SupervisorAPI\bin\Debug\netcoreapp3.1\Microsoft.Azure.Storage.Common.dll
-C:\RSI\Projects\MediaValet\SourceCode\MediaValet\SupervisorAPI\bin\Debug\netcoreapp3.1\Microsoft.Azure.Storage.Queue.dll
 C:\RSI\Projects\MediaValet\SourceCode\MediaValet\SupervisorAPI\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.dll
 C:\RSI\Projects\MediaValet\SourceCode\MediaValet\SupervisorAPI\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.CSharp.dll
 C:\RSI\Projects\MediaValet\SourceCode\MediaValet\SupervisorAPI\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.CSharp.Workspaces.dll

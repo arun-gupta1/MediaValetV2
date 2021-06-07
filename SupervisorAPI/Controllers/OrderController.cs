@@ -1,12 +1,13 @@
 ﻿using MediaValet.Model;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.Storage.Queue;
+using Microsoft.WindowsAzure.Storage.Queue;
 using Microsoft.WindowsAzure.Storage.Table;
 using SupervisorAPI.Model;
 using SupervisorAPI.Service.BusinessLogic;
 using SupervisorAPI.Service.Contract;
 using System;
 using System.Net;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace SupervisorAPI.Controllers
@@ -45,11 +46,11 @@ namespace SupervisorAPI.Controllers
                     OrderText = msg.OrderText
 
                 };
-                string orderString = System.Text.Json.JsonSerializer.Serialize(orderEntity);
+                string orderString = JsonSerializer.Serialize(orderEntity);
 
                 var orderListQueue = _orderQueue.GetQueue(StorageEntity.OrderStorageQueue);
 
-                orderListQueue.AddMessage(new CloudQueueMessage(Utility.Base64Encode(orderString)));
+                await orderListQueue.AddMessageAsync(new CloudQueueMessage(Utility.Base64Encode(orderString)));
 
                 CloudTable cloudTable = _confirmationTable.GetTable(StorageEntity.ConfirmationStorageTable);
 
@@ -81,7 +82,7 @@ namespace SupervisorAPI.Controllers
                         AgentId = "",
                         OrderStatus = "",
                         StatusCode = (int)HttpStatusCode.Created,
-                        FaultMessage = "Order has been added into queue. Agent will process it later."
+                        FaultMessage = "Order added to queue successfully, will be processed later."
                     };
                     this.HttpContext.Response.StatusCode = (int)HttpStatusCode.Created;
                 }

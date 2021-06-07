@@ -47,9 +47,6 @@ C:\RSI\Projects\MediaValet\SourceCode\MediaValet\Agent\bin\Debug\netcoreapp3.1\A
 C:\RSI\Projects\MediaValet\SourceCode\MediaValet\Agent\bin\Debug\netcoreapp3.1\Agent.runtimeconfig.dev.json
 C:\RSI\Projects\MediaValet\SourceCode\MediaValet\Agent\bin\Debug\netcoreapp3.1\Agent.dll
 C:\RSI\Projects\MediaValet\SourceCode\MediaValet\Agent\bin\Debug\netcoreapp3.1\Agent.pdb
-C:\RSI\Projects\MediaValet\SourceCode\MediaValet\Agent\bin\Debug\netcoreapp3.1\Microsoft.Azure.KeyVault.Core.dll
-C:\RSI\Projects\MediaValet\SourceCode\MediaValet\Agent\bin\Debug\netcoreapp3.1\Microsoft.Azure.Storage.Common.dll
-C:\RSI\Projects\MediaValet\SourceCode\MediaValet\Agent\bin\Debug\netcoreapp3.1\Microsoft.Azure.Storage.Queue.dll
 C:\RSI\Projects\MediaValet\SourceCode\MediaValet\Agent\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 C:\RSI\Projects\MediaValet\SourceCode\MediaValet\Agent\bin\Debug\netcoreapp3.1\NLog.dll
 C:\RSI\Projects\MediaValet\SourceCode\MediaValet\Agent\bin\Debug\netcoreapp3.1\Microsoft.WindowsAzure.Storage.dll

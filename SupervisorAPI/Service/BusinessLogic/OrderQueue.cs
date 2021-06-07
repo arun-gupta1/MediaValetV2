@@ -1,7 +1,6 @@
-﻿using Microsoft.Azure.Storage;
-using Microsoft.Azure.Storage.Queue;
-using Microsoft.Extensions.Options;
-using SupervisorAPI.Infrastructure.AzureStorageSetting;
+﻿using MediaValet.Model;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Queue;
 using SupervisorAPI.Service.Contract;
 using System;
 
@@ -10,11 +9,11 @@ namespace SupervisorAPI.Service.BusinessLogic
     public class OrderQueue: IOrderQueue
     {
         private readonly CloudQueueClient _queueClient;
-        public OrderQueue(IOptions<AzureStorageConnection> settings)
+        public OrderQueue()
         {
             try
             {
-                CloudStorageAccount storageAccount = CloudStorageAccount.Parse(settings.Value.ConnectionString);
+                CloudStorageAccount storageAccount = CloudStorageAccount.Parse(AzureStorageConnection.ConnectionString);
                 _queueClient = storageAccount.CreateCloudQueueClient();
             }
             catch (Exception ex)
